@@ -15,16 +15,17 @@ app.get("/random", (req, res) => {
 
 //2. GET a specific joke
 app.get("/jokes/:id", (req, res) => {
-  const id = parstInt(req.params.id);
+  const id = parseInt(req.params.id);
   const foundJoke = jokes.find((joke) => joke.id === id);
   res.json(foundJoke);
 });
+
 //3. GET a jokes by filtering on the joke type
 app.get("/filter", (req, res) => {
   const type = req.query.type;
   const filteredActivities = jokes.filter((joke) => joke.jokeType === type);
   res.json(filteredActivities);
-});
+    });
 
 //4. POST a new joke
 app.post("/jokes", (req, res) => {
@@ -34,12 +35,12 @@ app.post("/jokes", (req, res) => {
     jokeType: req.body.type,
   };
   jokes.push(newJoke);
-  console.log(jokes.slice(- 1));
+  console.log(jokes.slice(-1));
   res.json(newJoke);
 });
 
 //5. PUT a joke
-app.put("/jokes/:id", (req, res) =>{
+app.put("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const replacementJoke = {
     id: id,
@@ -63,35 +64,36 @@ app.patch("/jokes/:id", (req, res) => {
     jokeType: req.body.type || existingJoke.jokeType,
   };
   const searchIndex = jokes.findIndex((joke) => joke.id === id);
-  jokes[searchIndex] = replacementJoke;
+  joke [searchIndex] = replacementJoke;
   console.log(jokes[searchIndex]);
   res.json(replacementJoke);
 });
+
 
 //7. DELETE Specific joke
 app.delete("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const searchIndex = jokes.findIndex((joke) => joke.id === id);
-  if (searchIndex > -1){
+  if (searchIndex > -1) {
     jokes.splice(searchIndex, 1);
     res.sendStatus(200);
   } else {
     res
-      .status(404)
-      .json({error: `Joke with id: ${id} not found. no jokes were deleted`});
+    .status(404)
+    .json({ error: `Joke with id: ${id} not found. No jokes were deleted.` });
   }
 });
 
 //8. DELETE All jokes
 app.delete("/all", (req, res) => {
   const userKey = req.query.key;
-  if (userkey === masterkey) {
+  if (userKey === masterKey) {
     jokes = [];
-    res.sendStatus(200);
+    res.sendstatus(200);
   } else {
     res
-      .status(404)
-      .json({ error: `You are not authorized to perform this action.`});
+    .status(404)
+    .json({ error: `You are not authorized to perform this action.` });
   }
 });
 
