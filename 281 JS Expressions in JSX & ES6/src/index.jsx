@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 const fName = "Ryan";
 const lName ="Reed";
-const num = "67";
+const num = 67;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
